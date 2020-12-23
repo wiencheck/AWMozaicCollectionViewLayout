@@ -39,6 +39,7 @@ class AWMozaicLayoutAttributes {
     
     func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let attribute = self.layoutAttributesArray[indexPath.item]
+        attribute.zIndex = 10
         return attribute
     }
     
@@ -46,7 +47,7 @@ class AWMozaicLayoutAttributes {
         var resultAttributes: [UICollectionViewLayoutAttributes] = []
         let unionRectsCount = self.unionRectsArray.count
         var begin = 0
-        var end = unionRectsCount
+        var end = self.layoutAttributesArray.count
         
         for unionRectIndex in (0..<unionRectsCount) {
             if !rect.intersects(self.unionRectsArray[unionRectIndex]) {
@@ -70,7 +71,7 @@ class AWMozaicLayoutAttributes {
                 resultAttributes.append(attributes)
             }
         }
-        
+
         return resultAttributes
     }
     

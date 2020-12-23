@@ -123,11 +123,12 @@ open class AWMozaicLayout: UICollectionViewFlowLayout {
         let layoutGeometriesContentHeight = layoutGeometries.reduce(0) { result, geometry in
             return result + geometry.contentHeight
         }
+
         return CGSize(width: contentSize.width, height: max(layoutGeometriesContentHeight, delta));
     }
     
     open override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return self.layoutAttrbutes?.layoutAttributesForItem(at: indexPath)
+        return layoutAttrbutes?.layoutAttributesForItem(at: indexPath)
     }
  
     open override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
@@ -135,7 +136,7 @@ open class AWMozaicLayout: UICollectionViewFlowLayout {
     }
 
     open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        return self.layoutAttrbutes?.layoutAttributesForElementsInRect(rect)
+        return layoutAttrbutes?.layoutAttributesForElementsInRect(rect)
     }
     
     //MARK: - Helpers

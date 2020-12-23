@@ -11,7 +11,7 @@ import AWMozaicCollectionViewLayout
 class ViewController: UIViewController {
     
     lazy var colors: [UIColor] = {
-        return (0...120).map { _ in UIColor.random }
+        return (0...600).map { _ in UIColor.random }
     }()
     
     lazy var mozaicLayout = AWMozaicLayout(delegate: self)
@@ -20,7 +20,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         collectionView.setCollectionViewLayout(mozaicLayout, animated: false)
         collectionView.dataSource = self
     }
@@ -42,7 +41,7 @@ extension ViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath)
         
         cell.contentView.backgroundColor = colors[indexPath.row]
         return cell
