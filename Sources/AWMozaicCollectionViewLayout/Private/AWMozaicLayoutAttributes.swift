@@ -38,30 +38,15 @@ class AWMozaicLayoutAttributes {
     //MARK: - Interface
     
     func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attribute = self.layoutAttributesArray[indexPath.item]
-        attribute.zIndex = 10
-        return attribute
+        return layoutAttributesArray[indexPath.item]
     }
     
     func layoutAttributesForElementsInRect(_ rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        var resultAttributes: [UICollectionViewLayoutAttributes] = []
-        let unionRectsCount = self.unionRectsArray.count
-        var begin = 0
-        let end = self.layoutAttributesArray.count
-        
-        for unionRectIndex in (0..<unionRectsCount) {
-            if !rect.intersects(self.unionRectsArray[unionRectIndex]) {
-                continue
+        let resultAttributes: [UICollectionViewLayoutAttributes] = layoutAttributesArray.compactMap { attributes in
+            guard rect.intersects(attributes.frame) else {
+                return nil
             }
-            begin = unionRectIndex * AWMozaicLayoutUnionSize
-            break
-        }
-        
-        for i in begin..<end {
-            let attributes = self.layoutAttributesArray[i]
-            if rect.intersects(attributes.frame) {
-                resultAttributes.append(attributes)
-            }
+            return attributes
         }
 
         return resultAttributes
