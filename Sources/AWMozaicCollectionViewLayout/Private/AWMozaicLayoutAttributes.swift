@@ -47,21 +47,13 @@ class AWMozaicLayoutAttributes {
         var resultAttributes: [UICollectionViewLayoutAttributes] = []
         let unionRectsCount = self.unionRectsArray.count
         var begin = 0
-        var end = self.layoutAttributesArray.count
+        let end = self.layoutAttributesArray.count
         
         for unionRectIndex in (0..<unionRectsCount) {
             if !rect.intersects(self.unionRectsArray[unionRectIndex]) {
                 continue
             }
             begin = unionRectIndex * AWMozaicLayoutUnionSize
-            break
-        }
-        
-        for unionRectIndex in (0..<unionRectsCount).reversed() {
-            if !rect.intersects(self.unionRectsArray[unionRectIndex]) {
-                continue
-            }
-            end = min((unionRectIndex + 1) * AWMozaicLayoutUnionSize, self.layoutAttributesArray.count)
             break
         }
         
