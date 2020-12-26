@@ -84,8 +84,10 @@ open class AWMozaicLayout: UICollectionViewFlowLayout {
         guard self.delegate != nil else {
             fatalError("self.delegate expected to be not nil when execute prepareLayout()")
         }
-        super.prepare()
-        if self.isLayoutReady() {
+        guard collectionView.collectionViewLayout is AWMozaicLayout else {
+            return
+        }
+        if isLayoutReady() {
             return
         }
         
